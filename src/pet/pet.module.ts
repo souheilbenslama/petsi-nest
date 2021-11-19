@@ -6,7 +6,6 @@ import { PetService } from './pet.service';
 
 @Module({
   controllers: [ PetController],imports:[
-
     MongooseModule.forFeature([{name: Pet.name, schema: PetSchema}])], providers: [PetService],
 })
 export class PetModule {}

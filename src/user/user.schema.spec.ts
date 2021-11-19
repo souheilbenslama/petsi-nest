@@ -1,4 +1,4 @@
-import { UserSchema.Ts } from './user.schema.ts';
+import { UserSchema.Ts } from './user.schema';
 
 describe('UserSchema.Ts', () => {
   it('should be defined', () => {
