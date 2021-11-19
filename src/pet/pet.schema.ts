@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
 //don't what it does souheil
- export type CatDocument = Pet & Document;
+ export type PetDocument = Pet & Document;
 
 
 @Schema({timestamps:true})
