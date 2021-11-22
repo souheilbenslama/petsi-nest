@@ -10,8 +10,6 @@ import { PetService } from './pet.service';
 @Controller('pets')
 export class PetController {
     constructor(private readonly petService: PetService){}
-    
-    
     @Post()
     @UseFilters( new PetAddFilter())
     async addPet(@Res() response,@Body() pet:addPetDto){
