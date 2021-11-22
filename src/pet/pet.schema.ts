@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
+
 //don't what it does souheil
  export type PetDocument = Pet & Document;
 
@@ -31,6 +32,12 @@ export class Pet {
   status ;
   @Prop ({type:mongoose.Schema.Types.ObjectId,ref:'User'})
   owner ; //"User";
+  @Prop({type:Boolean,default:false})
+  deleted ; 
+  @Prop({type:Date,default:null})
+  deleted_At ; 
 }
 
 export const PetSchema = SchemaFactory.createForClass(Pet);
+
+  
