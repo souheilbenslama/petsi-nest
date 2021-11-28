@@ -5,10 +5,11 @@ import { updateUserDto} from './dto/updateUser.dto'
 import { UserAddFilter } from './user-add.filter';
 import { User } from './user.schema';
 import { UserService } from './user.service';
+import { UsersService2 } from './user2.service';
 
 @Controller('users')
 export class UserController {
-    constructor(private readonly userService: UserService){}
+    constructor(private readonly userService: UserService , private readonly userService2: UsersService2){}
 
 
     @Post()
@@ -23,7 +24,8 @@ export class UserController {
     @Get(':id')
     async getUser(@Res() response,@Param() param){
 
-        const user = await this.userService.find(param.id)
+        //const user = await this.userService.find(param.id)
+        const user =await  this.userService2.findOne({ _id: param.id });
         return response.status(HttpStatus.OK).json(user) ;
     }
 

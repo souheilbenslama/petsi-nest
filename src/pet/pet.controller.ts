@@ -13,42 +13,38 @@ export class PetController {
     @Post()
     @UseFilters( new PetAddFilter())
     async addPet(@Res() response,@Body() pet:addPetDto){
-       
         const newPet = await this.petService.createPet(pet) ;
-        return response.status(HttpStatus.CREATED).json(newPet) ; 
-        
+        return response.status(HttpStatus.CREATED).json(newPet) ;    
     }
 
  
     @Get()
     async getPets(@Res() response){
-        const pets= await this.petService.findAllPets() ;
+        const pets= await this.petService.find({deleted:false}) ;
         return response.status(HttpStatus.OK).json(pets)
-
     }
 
     @Get("/one/:id")
     async getPetById(@Res()response , @Param("id") id : string ){
-        const pets= await this.petService.findByPetId(id) ;
+        const pets= await this.petService.find({_id:id,deleted:false}) ;
         return response.status(HttpStatus.OK).json(pets) ;
     }
 
     @Get("/:uid")
     async getUserPets(@Res()response , @Param("uid") id :string){
-        const pets= await this.petService.findPetByUserId(id) ;
+        const pets= await this.petService.find({"owner":id,deleted:false}) ;
         return response.status(HttpStatus.OK).json(pets) ;
-
     }
 
     @Patch("/:id")
     async updatePet(@Res() response , @Param("id") id:string , @Body() update: updatePetDto){
-        const result = await this.petService.updatePet(id,update) ;
+        const result = await this.petService.findOneAndUpdate({_id:id,deleted:false},{$set:update},{new:true}) ;
         return response.status(HttpStatus.OK).json(result) ;
     }
 
     @Delete("/:id")
     async deletePet( @Res() response , @Param("id") id : string ) {
-        const result = await this.petService.deletePet(id) ; 
+        const result = await this.petService.findOneAndUpdate({_id:id},{$set:{deleted:true,deleted_At:Date.now()}},{new:true}) ; 
         return response.status(HttpStatus.OK).json(result) ; 
     }
   
