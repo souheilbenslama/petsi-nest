@@ -1,5 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Exclude } from 'class-transformer';
 import * as mongoose from 'mongoose';
+import { UserRoleEnum } from 'src/enums/user-role.enum';
 
 //don't what it does souheil
  export type UserDocument = User & Document;
@@ -7,9 +10,10 @@ import * as mongoose from 'mongoose';
 
 @Schema({timestamps:true})
 export class User {
-  @Prop({type:String,required:true,trime:true})
+  @Prop({type:String,required:true,unique:true,trime:true})
   email: string;
 
+  @Exclude()
   @Prop({type:String,required:true,trime:true})
   password: string;
 
@@ -34,7 +38,7 @@ export class User {
   @Prop({type:String,required:true,trim:true})
   adress
   
-  @Prop({type:String,required:true,trim:true})
+  @Prop({type:String,enum:UserRoleEnum,default:UserRoleEnum.PET_OWNER})
   role ;
 
   @Prop({type:Boolean,default:false})
@@ -42,6 +46,10 @@ export class User {
   
   @Prop({type:Date,default:null})
   deleted_At ; 
+
+  @Exclude()
+  @Prop({type:String})
+  salt ; 
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

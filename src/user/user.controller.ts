@@ -1,24 +1,14 @@
-import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, UseFilters, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, Delete } from '@nestjs/common';
 import { response } from 'express';
 import { addUserDto } from './dto/adduser.dto';
 import { updateUserDto} from './dto/updateUser.dto'
-import { UserAddFilter } from './user-add.filter';
 import { User } from './user.schema';
 import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
     constructor(private readonly userService: UserService){}
-
-
-    @Post()
-    @UseFilters( new UserAddFilter())
-    async addUser(@Res() response,@Body() user:addUserDto){
-       
-        const newUser = await this.userService.create(user) ;
-        return response.status(HttpStatus.CREATED).json(newUser) ; 
-        
-    }
 
     @Get(':id')
     async getUser(@Res() response,@Param() param){
