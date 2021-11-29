@@ -1,20 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { GenericService } from 'src/generic/generic.service';
 import { User, UserDocument } from "./user.schema";
 
 @Injectable()
-export class UserService {
-    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
-
-    async create(user: Partial<User>): Promise<User> {
-        const newUser = new this.userModel(user);
-        return newUser.save();
-    }
-
-    async find(id: number): Promise<User> {
-        const user = await this.userModel.findById(id)
-        return user;
+export class UserService extends GenericService<UserDocument>{
+    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {
+        super(userModel);
     }
 
     async findAll(): Promise<User[]> {
