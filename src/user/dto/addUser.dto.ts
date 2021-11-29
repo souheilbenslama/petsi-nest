@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { Type } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsString, MinLength,isDate, IsDate, IsMongoId, IsNumber, IsPositive, IsIn, IsDateString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength,isDate, IsDate, IsMongoId, IsNumber, IsPositive, IsIn, IsDateString, IsEnum } from 'class-validator';
+import { UserRoleEnum } from 'src/enums/user-role.enum';
 
 //import { errorMessages } from '../../utils/utils'
 
@@ -7,7 +9,6 @@ export class addUserDto {
 
   @IsNotEmpty({message:"Email is empty!"})
   @IsEmail()
-  @IsString()  
   email:string;
 
   @IsNotEmpty({message:"Pasword is empty!"})
@@ -42,7 +43,7 @@ export class addUserDto {
   @IsNotEmpty({message:"gender is empty!"})
   gender:string;
 
-  @IsString()
+  @IsEnum(UserRoleEnum,{message:"The role must be one of the valid roles(pet owner/veterinary/admin)"})
   @IsNotEmpty({message:"role is empty!"})
-  role:string;
+  role:UserRoleEnum;
  }

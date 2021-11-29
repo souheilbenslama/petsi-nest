@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import { Request, Response } from 'express';
 
 @Catch(HttpException)
-export class UserAddFilter implements ExceptionFilter {
+export class RegisterFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();

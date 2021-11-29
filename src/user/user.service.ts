@@ -10,21 +10,20 @@ export class UserService extends GenericService<UserDocument>{
         super(userModel);
     }
 
-    async findAll(): Promise<User[]> {
-        const users = await this.userModel.find()
-        return users;
-    }
+  async update(id: string, user: Partial<User>): Promise<User> {
+    console.log(id);
+    console.log(user);
+    const updatedUser = await this.userModel.findByIdAndUpdate(id, user);
+    console.log(updatedUser);
+    return updatedUser;
+  }
 
-    async update(id: string, user: Partial<User>): Promise<User> {
-        console.log(id)
-        console.log(user)
-        const updatedUser = await this.userModel.findByIdAndUpdate(id, user);
-        console.log(updatedUser)
-        return updatedUser
-    }
-
-    async delete(id: string): Promise<User>{
-        const deletedUser = await this.userModel.findOneAndUpdate({_id:id},{$set:{deleted:true,deleted_At:Date.now()}},{new:true}) ;
-        return deletedUser;
-    }
+  async delete(id: string): Promise<User> {
+    const deletedUser = await this.userModel.findOneAndUpdate(
+      { _id: id },
+      { $set: { deleted: true, deleted_At: Date.now() } },
+      { new: true },
+    );
+    return deletedUser;
+  }
 }

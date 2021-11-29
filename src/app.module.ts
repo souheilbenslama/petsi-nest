@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,6 +9,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { VaccineModule } from './vaccine/vaccine.module';
 
 
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -15,6 +17,7 @@ import { VaccineModule } from './vaccine/vaccine.module';
     MongooseModule.forRoot('mongodb+srv://petsi:petsi@cluster0.mrwox.mongodb.net/petsi2'),
     UserModule,
     VaccineModule,
+    AuthModule
   ],
   controllers: [AppController, ],
   providers: [AppService],
