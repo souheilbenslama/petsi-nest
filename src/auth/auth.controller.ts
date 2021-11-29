@@ -12,13 +12,13 @@ export class AuthController {
     @UseInterceptors(ClassSerializerInterceptor)
     @Post("register")
     @UseFilters( new RegisterFilter())
-    async register(@Res() response,@Body() user:addUserDto){
+    async register(@Res() response,@Body() user:addUserDto) {
         const newUser = await this.authService.register(user) ;
         return response.status(HttpStatus.CREATED).json(newUser) ;  
     }
 
     @Post("login")
-    async login(@Res() response,@Body() user:loginDto){
+    async login(@Res() response , @Body() user:loginDto){
         const newUser = await this.authService.login(user) ;
         return response.status(HttpStatus.CREATED).json(newUser) ; 
     }

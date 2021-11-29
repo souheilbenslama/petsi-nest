@@ -1,16 +1,14 @@
-/* eslint-disable prettier/prettier */
-import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, Delete, UseFilters } from '@nestjs/common';
+import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, UseFilters, Delete } from '@nestjs/common';
 import { response } from 'express';
 import { AddVaccineDto } from './dto/addvaccine.dto';
 import { UpdateVaccineDto} from './dto/updateVaccine.dto'
+import { VaccineAddFilter } from './vaccine-add.filter';
 import { Vaccine } from './vaccine.schema';
 import { VaccineService } from './vaccine.service';
 
 @Controller('vaccines')
 export class VaccineController {
     constructor(private readonly vaccineService: VaccineService){}
-
-
     @Post()
     //@UseFilters( new VaccineAddFilter())
     async addVaccine(@Res() response,@Body() vaccine:AddVaccineDto){
