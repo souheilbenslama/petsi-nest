@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, Delete, UseFilters } from '@nestjs/common';
 import { response } from 'express';
-import { addUserDto } from './dto/adduser.dto';
 import { updateUserDto} from './dto/updateUser.dto'
 import { User } from './user.schema';
 import { UserService } from './user.service';
@@ -10,9 +9,9 @@ import { UserService } from './user.service';
 export class UserController {
     constructor(private readonly userService: UserService){}
 
-
+   /*
     @Post()
-    //@UseFilters( new UserAddFilter())
+    @UseFilters( new UserAddFilter())
     async addUser(@Res() response,@Body() user:addUserDto){
        try{
         const newUser = await this.userService.create(user) ;
@@ -23,6 +22,7 @@ export class UserController {
          
         
     }
+    */
 
     @Get(':id')
     async getUser(@Res() response,@Param() param){
