@@ -11,8 +11,6 @@ export class UserService extends GenericService<UserDocument>{
     }
 
   async update(id: string, user: Partial<User>): Promise<User> {
-    console.log(id);
-    console.log(user);
     const updatedUser = await this.userModel.findByIdAndUpdate(id, user);
     console.log(updatedUser);
     return updatedUser;

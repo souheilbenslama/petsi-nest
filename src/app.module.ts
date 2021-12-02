@@ -10,6 +10,7 @@ import { VaccineModule } from './vaccine/vaccine.module';
 
 
 import { AuthModule } from './auth/auth.module';
+import { AppointmentModule } from './appointment/appointment.module';
 
 
 @Module({
@@ -17,7 +18,8 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot('mongodb+srv://petsi:petsi@cluster0.mrwox.mongodb.net/petsi2'),
     UserModule,
     VaccineModule,
-    AuthModule
+    AuthModule,
+    AppointmentModule
   ],
   controllers: [AppController, ],
   providers: [AppService],
