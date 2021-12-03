@@ -24,9 +24,11 @@ export class addPetDto {
   @IsIn(["Male","Female"])
   sex ;
 
+
  @IsNumber()
  @IsPositive()
-  weight ;
+  weight ;   
+
 
   status ;
 

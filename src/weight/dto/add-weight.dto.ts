@@ -6,9 +6,6 @@ export class AddWeightDto {
     @IsNumber()
     weight;
 
-    @IsNotEmpty({message:"weight date can not be empty"})
-    @Type(() => Date)
-    date;
 
     @IsNotEmpty({message:" pet can not be empty"})
     @IsMongoId()

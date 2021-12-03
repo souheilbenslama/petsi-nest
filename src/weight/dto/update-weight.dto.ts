@@ -6,9 +6,6 @@ export class UpdateWeightDto {
     @IsNumber()
     weight;
 
-    @Type(() => Date)
-    date;
-
     @IsMongoId()
     pet;
 }

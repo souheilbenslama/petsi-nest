@@ -6,25 +6,21 @@ import { ObjectID } from 'typeorm';
 import { addPetDto } from './dto/addpet.dto';
 import { updatePetDto } from './dto/updatepet.dto';
 import { Pet, PetDocument } from "./pet.schema";
-import { Weight,WeightDocument } from './weight.schema';
+import { WeightService } from 'src/weight/weight.service';
 
 @Injectable()
 export class PetService extends GenericService<PetDocument> {
 
-    constructor(@InjectModel(Pet.name) private petModel: Model<PetDocument> ,@InjectModel(Weight.name) private weightModel: Model<WeightDocument> ) {
+    constructor(@InjectModel(Pet.name) private petModel: Model<PetDocument> , private weightService: WeightService ) {
       super(petModel) ;
     }
 
     // missing getting file for image and user id from the headers
 
-    async createPet(pet: addPetDto): Promise<Pet> {
+    async createPet(pet: addPetDto,weight): Promise<Pet> {
       const newPet = await  this.create(pet) ; 
      // will be changed after setting weight services 
-      const weightobj= new Weight();
-      weightobj.weight= newPet.weight ;
-      weightobj.pet= newPet._id ;
-      const newWeight = new  this.weightModel(weightobj) ;
-      const  result2 = await newWeight.save() ;
+     const weightobj= await this.weightService.create({pet:newPet._id,weight:weight}) ; 
       // 
         return  newPet ; 
     }
