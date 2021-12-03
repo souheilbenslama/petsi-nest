@@ -12,6 +12,7 @@ import { VaccineModule } from './vaccine/vaccine.module';
 import { AuthModule } from './auth/auth.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { BathModule } from './bath/bath.module';
+import { WeightModule } from './weight/weight.module';
 
 
 @Module({
@@ -21,7 +22,8 @@ import { BathModule } from './bath/bath.module';
     VaccineModule,
     AuthModule,
     AppointmentModule,
-    BathModule
+    BathModule,
+    WeightModule
   ],
   controllers: [AppController, ],
   providers: [AppService],

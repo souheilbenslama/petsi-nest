@@ -16,8 +16,8 @@ export class PetController {
     @Post()
     @UseGuards(JwtAuthGuard)
     @UseFilters( new PetAddFilter())
-    async addPet(@Res() response,@Body() pet:addPetDto){
-        const newPet = await this.petService.createPet(pet) ;
+    async addPet(@Res() response,@Body() pet:addPetDto,@Body("weight") weight ){
+        const newPet = await this.petService.createPet(pet,weight) ;
         return response.status(HttpStatus.CREATED).json(newPet) ;    
     }
  
