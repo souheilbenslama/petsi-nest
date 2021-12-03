@@ -9,7 +9,7 @@ import { PetService } from './pet.service';
 //import { WeightModule } from './weight/weight.module';
 
 @Module({
-  controllers: [ PetController],imports:[
+  controllers: [ PetController] , imports:[
 
     MongooseModule.forFeature([{name: Pet.name, schema: PetSchema},]),WeightModule
 
