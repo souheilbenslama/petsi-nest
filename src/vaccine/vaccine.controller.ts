@@ -1,6 +1,6 @@
 import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, UseFilters, Delete } from '@nestjs/common';
 import { response } from 'express';
-import { AddVaccineDto } from './dto/addvaccine.dto';
+import { AddVaccineDto } from 'src/vaccine/dto/addVaccine.dto';
 import { UpdateVaccineDto} from './dto/updateVaccine.dto'
 import { VaccineAddFilter } from './vaccine-add.filter';
 import { Vaccine } from './vaccine.schema';

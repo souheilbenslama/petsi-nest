@@ -1,6 +1,6 @@
 import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, UseFilters, Delete } from '@nestjs/common';
 import { response } from 'express';
-import { AddWeightDto } from './dto/add-weight.dto';
+import { AddWeightDto } from 'src/weight/dto/add-weight.dto';
 import { UpdateWeightDto} from './dto/update-Weight.dto'
 import { WeightAddFilter } from './weight-add.filter';
 import { Weight } from './weight.schema';
