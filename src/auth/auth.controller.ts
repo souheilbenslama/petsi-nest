@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Body, ClassSerializerInterceptor, Controller, HttpStatus, Post, Res, UseFilters, UseInterceptors } from '@nestjs/common';
-import { addUserDto } from 'src/user/dto/adduser.dto';
+import { addUserDto } from 'src/auth/dto/addUser.dto';
 import { RegisterFilter } from './auth.filter';
 import { AuthService } from './auth.service';
 import { loginDto } from './dto/login.dto';
