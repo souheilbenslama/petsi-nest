@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString, MaxLength, MinLength,isDate, IsDate, IsMongoId, I
 
 //import { errorMessages } from '../../utils/utils'
 
-export class addWeight {
+export class addWeightDto {
  
   weight: Number;
   
