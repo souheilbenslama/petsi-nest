@@ -1,10 +1,9 @@
 import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, UseFilters, Delete } from '@nestjs/common';
 import { response } from 'express';
 import { AddAppointmentDto } from 'src/appointment/dto/add-appointment.dto'
-import { UpdateAppointmentDto } from 'src/appointment/dto/update-Appointment.dto'
-import { AppointmentAddFilter } from './appointment-add.filter';
-import { Appointment } from './appointment.schema';
-import { AppointmentService } from './appointment.service';
+import { UpdateAppointmentDto } from 'src/appointment/dto/updateappointment.dto'
+
+import { AppointmentService } from 'src/appointment/appointment.service';
 
 @Controller('appointments')
 export class AppointmentController {

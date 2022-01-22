@@ -2,9 +2,8 @@ import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, UseFilters, De
 import { response } from 'express';
 import { AddWeightDto } from 'src/weight/dto/add-weight.dto';
 import { UpdateWeightDto } from 'src/weight/dto/update-Weight.dto'
-import { WeightAddFilter } from './weight-add.filter';
-import { Weight } from './weight.schema';
-import { WeightService } from './weight.service';
+
+import { WeightService } from 'src/weight/weight.service';
 
 @Controller('weights')
 export class WeightController {
