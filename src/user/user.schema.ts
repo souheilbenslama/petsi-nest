@@ -2,6 +2,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Exclude } from 'class-transformer';
 import * as mongoose from 'mongoose';
+import { Document } from 'mongoose';
 import { UserRoleEnum } from 'src/enums/user-role.enum';
 
 //don't what it does souheil

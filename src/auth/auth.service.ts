@@ -11,13 +11,16 @@ export class AuthService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>,private jwtService:JwtService) {}
 
     async register(user: Partial<User>): Promise<User> {
+        console.log("hellooooooooooooooooooooooooooooooooooo");
         const newUser = new this.userModel(user);
+        const alreadyUser = await this.userModel.findOne({email:user.email});
+        if(user) throw new UnauthorizedException('Email already in use!');
         newUser.salt = await bcrypt.genSalt();
         newUser.password = await bcrypt.hash(newUser.password, newUser.salt);
         try{
           await newUser.save();
         }catch(e){
-          throw new ConflictException("Email already in use");
+          throw new ConflictException("Saving new user error");
         }
         delete newUser.password;
         delete newUser.salt;

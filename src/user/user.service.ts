@@ -1,26 +1,16 @@
-/* eslint-disable prettier/prettier */
-import { ConflictException, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User, UserDocument } from './user.schema';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { GenericService } from 'src/generic/generic.service';
+import { User, UserDocument } from "./user.schema";
 
-@Injectable() 
-export class UserService { 
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
-
-  async find(id: number): Promise<User> {
-    const user = await this.userModel.findById(id);
-    return user;
-  }
-
-  async findAll(): Promise<User[]> {
-    const users = await this.userModel.find();
-    return users;
-  }
+@Injectable()
+export class UserService extends GenericService<UserDocument>{
+    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {
+        super(userModel);
+    }
 
   async update(id: string, user: Partial<User>): Promise<User> {
-    console.log(id);
-    console.log(user);
     const updatedUser = await this.userModel.findByIdAndUpdate(id, user);
     console.log(updatedUser);
     return updatedUser;

@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.8.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.5",
     "@nestjs/core": "^8.0.0",
@@ -30,10 +31,16 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.2",
     "@types/mongoose-delete": "^0.5.7",
+    "@types/multer": "^1.4.7",
+    "@types/uuid": "^8.3.3",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+<<<<<<< HEAD
     "cors": "^2.8.5",
+=======
+    "dotenv": "^10.0.0",
+>>>>>>> f50e9c80ed4a92e8451fe99600c6550e413b5744
     "helmet": "^4.6.0",
     "mongoose": "^6.0.13",
     "mongoose-delete": "^0.5.4",
@@ -44,7 +51,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.40"
+    "typeorm": "^0.2.40",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
