@@ -5,7 +5,6 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/user/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +17,7 @@ export class AuthService {
         try{
           await newUser.save();
         }catch(e){
-          throw new ConflictException("L'email est deja utilisé");
+          throw new ConflictException("Email already in use");
         }
         delete newUser.password;
         delete newUser.salt;
