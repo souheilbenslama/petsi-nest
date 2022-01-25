@@ -36,11 +36,8 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
-<<<<<<< HEAD
     "cors": "^2.8.5",
-=======
     "dotenv": "^10.0.0",
->>>>>>> f50e9c80ed4a92e8451fe99600c6550e413b5744
     "helmet": "^4.6.0",
     "mongoose": "^6.0.13",
     "mongoose-delete": "^0.5.4",
