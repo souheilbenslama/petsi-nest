@@ -19,10 +19,11 @@ export class AuthService {
         try{
           await newUser.save();
         }catch(e){
+          console.log(e);
           throw new ConflictException("Saving new user error");
         }
-        delete newUser.password;
-        delete newUser.salt;
+        newUser.password = undefined;
+        newUser.salt = undefined;
         return newUser;
       }
 
@@ -33,8 +34,8 @@ export class AuthService {
         if(isMatch){
           const payload = {firstName:user.firstName,email:user.email,role:user.role}
           const jwt = await this.jwtService.sign(payload);
-          delete user.password;
-          delete user.salt;
+          user.password = undefined;
+          user.salt = undefined;
           return {"user":user,"access_token":jwt};
         }else{
           throw new UnauthorizedException('Wrong password!');

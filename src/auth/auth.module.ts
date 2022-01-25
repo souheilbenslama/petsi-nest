@@ -9,6 +9,8 @@ import { JwtModule } from '@nestjs/jwt';
 import * as dotenv from "dotenv";
 import { JwtStrategy } from './strategy/passport-jwt.strategy';
 import { ConfigService } from '@nestjs/config';
+import { MulterModule } from '@nestjs/platform-express';
+import { NestjsFormDataModule } from 'nestjs-form-data';
 
 
 dotenv.config();
@@ -16,7 +18,9 @@ dotenv.config();
   imports:[
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     PassportModule.register({defaultStrategy:"jwt"}),
-    JwtModule.register({secret:process.env.SECRET,signOptions:{expiresIn:3600}})
+    JwtModule.register({secret:process.env.SECRET,signOptions:{expiresIn:3600}}),
+    MulterModule.register({dest: '../uploads'}),
+    NestjsFormDataModule,
   ],
   providers: [AuthService,JwtStrategy,ConfigService],
   controllers: [AuthController]
