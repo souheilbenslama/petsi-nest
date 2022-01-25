@@ -11,10 +11,9 @@ export class AuthService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>,private jwtService:JwtService) {}
 
     async register(user: Partial<User>): Promise<User> {
-        console.log("hellooooooooooooooooooooooooooooooooooo");
         const newUser = new this.userModel(user);
         const alreadyUser = await this.userModel.findOne({email:user.email});
-        if(user) throw new UnauthorizedException('Email already in use!');
+        if(alreadyUser) throw new UnauthorizedException('Email already in use!');
         newUser.salt = await bcrypt.genSalt();
         newUser.password = await bcrypt.hash(newUser.password, newUser.salt);
         try{
@@ -29,14 +28,16 @@ export class AuthService {
 
     async login(userData: Partial<User>){
         const user = await this.userModel.findOne({email:userData.email})
-        if (!user) throw new UnauthorizedException('Credentials incorrect');
-        if (!bcrypt.compare(userData.password,user.password)){
-            throw new UnauthorizedException('password incorrect');
+        if (!user) throw new UnauthorizedException('Wrong credentials!');
+        const isMatch = await bcrypt.compare(userData.password,user.password)
+        if(isMatch){
+          const payload = {firstName:user.firstName,email:user.email,role:user.role}
+          const jwt = await this.jwtService.sign(payload);
+          delete user.password;
+          delete user.salt;
+          return {"user":user,"access_token":jwt};
+        }else{
+          throw new UnauthorizedException('Wrong password!');
         }
-        const payload = {firstName:user.firstName,email:user.email,role:user.role}
-        const jwt = await this.jwtService.sign(payload);
-        delete user.password;
-        delete user.salt;
-        return {"user":user,"access_token":jwt};
     }
 }
