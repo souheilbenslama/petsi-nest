@@ -13,10 +13,12 @@ import { AuthModule } from './auth/auth.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { BathModule } from './bath/bath.module';
 import { WeightModule } from './weight/weight.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
   imports: [
+    ConfigModule.forRoot({isGlobal:true}),
     PetModule,
     MulterModule.register({dest: '/src/uploads'}),
     MongooseModule.forRoot('mongodb+srv://petsi:petsi@cluster0.mrwox.mongodb.net/petsi2'),

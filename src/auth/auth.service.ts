@@ -8,7 +8,10 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>,private jwtService:JwtService) {}
+    constructor(
+      @InjectModel(User.name) private userModel: Model<UserDocument>,
+      private jwtService:JwtService,
+      ) {}
 
     async register(user: Partial<User>): Promise<User> {
         const newUser = new this.userModel(user);
@@ -41,4 +44,5 @@ export class AuthService {
           throw new UnauthorizedException('Wrong password!');
         }
     }
+
 }

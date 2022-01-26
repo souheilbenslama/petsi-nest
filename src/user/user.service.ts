@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
@@ -13,6 +14,8 @@ export class UserService extends GenericService<UserDocument>{
   async update(id: string, user: Partial<User>): Promise<User> {
     const updatedUser = await this.userModel.findByIdAndUpdate(id, user);
     console.log(updatedUser);
+    updatedUser.password = undefined;
+    updatedUser.salt = undefined;
     return updatedUser;
   }
 

@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import { MongodbIndexOptions } from 'typeorm';
 
- export type BathDocument = Bath & Document;
+export type BathDocument = Bath & Document;
 
 
 @Schema({timestamps:true})
