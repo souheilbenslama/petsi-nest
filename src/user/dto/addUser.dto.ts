@@ -12,16 +12,15 @@ export class addUserDto {
   email:string;
 
   @IsNotEmpty({message:"Pasword is empty!"})
+  @MinLength(4,{message:"password length is less than 4!"})
   @IsString()
   password:string;
 
   @IsNotEmpty({message:"firstName is empty!"})
-  @MinLength(3,{message:"firstName length is less than 3!"})
   @IsString()
   firstName:string;
 
   @IsNotEmpty({message:"lastName is empty!"})
-  @MinLength(3,{message:"lastName length is less than 3!"})
   @IsString()
   lastName:string;
 
@@ -36,6 +35,7 @@ export class addUserDto {
   adress:string;
 
   @IsString()
+  @MinLength(8,{message:"phone number length is less than 8!"})
   @IsNotEmpty({message:"phone is empty!"}) 
   phone:string;
 

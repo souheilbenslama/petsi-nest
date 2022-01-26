@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import *  as morgan from "morgan" ;
@@ -7,7 +8,8 @@ import * as dotenv from 'dotenv';
 async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
- 
+  const corsOptions = { origin: ['http://localhost:4200'] };
+  app.enableCors(corsOptions);
   dotenv.config() ;
   app.use(morgan('dev')) ; 
   app.use(helmet()) ;
