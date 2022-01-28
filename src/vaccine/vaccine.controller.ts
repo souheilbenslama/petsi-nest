@@ -25,7 +25,7 @@ export class VaccineController {
     @Get('/pet/:id')
     async getpPetVaccine(@Res() response,@Param() param){
         try {
-            const vaccine = await this.vaccineService.find({ pet : param.id})
+            const vaccine = await this.vaccineService.find({ pet : param.id},["pet","vet"])
             return response.status(HttpStatus.OK).json(vaccine) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;
@@ -49,7 +49,7 @@ export class VaccineController {
     }
 
     @Put(':id')
-    async updateVaccine(@Res() response,@Body() vaccine:UpdateVaccineDto, @Param() param){
+    async updateVaccine(@Res() response,@Body() vaccine:Partial<UpdateVaccineDto>, @Param() param){
         const updatedVaccine = await this.vaccineService.findOneAndUpdate({_id: param.id}, vaccine)
         return response.status(HttpStatus.OK).json(updatedVaccine) ;
     }

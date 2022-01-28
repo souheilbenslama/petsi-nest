@@ -73,7 +73,7 @@ export abstract class GenericService<T extends Document> {
       return new this.model(data).save() ;
   }
 
-  async findOneAndUpdate(query: FilterQuery<T>, data: UpdateQuery<T> ={}, options: Record<string, unknown> = {},): Promise<T> {
+  async findOneAndUpdate(query: FilterQuery<T>, data: UpdateQuery<Partial<T>> ={}, options: Record<string, unknown> = {},): Promise<T> {
     return this.model.findOneAndUpdate(query, data,options) ;
   }
 }
