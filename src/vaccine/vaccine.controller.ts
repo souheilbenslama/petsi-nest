@@ -35,7 +35,7 @@ export class VaccineController {
     @Get(':id')
     async getVaccine(@Res() response,@Param() param){
         try {
-            const vaccine = await this.vaccineService.findOne({ _id : param.id})
+            const vaccine = await this.vaccineService.findOne({ _id : param.id},["pet","vet"])
             return response.status(HttpStatus.OK).json(vaccine) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;

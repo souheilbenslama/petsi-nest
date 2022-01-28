@@ -33,7 +33,7 @@ export abstract class GenericService<T extends Document> {
    * @throws InternalServerErrorException
    */
   async findOne(
-    conditions: Partial<Record<keyof T, unknown>>,
+    conditions: Partial<Record<keyof T, unknown>>,populate=[],
     projection: string | Record<string, unknown> = {},
     options: Record<string, unknown> = {},
   ): Promise<T> {  
@@ -41,9 +41,15 @@ export abstract class GenericService<T extends Document> {
         conditions as FilterQuery<T>,
         projection,
         options,
-      );
+      ).populate(populate);;
     
   }
+
+
+
+  
+
+
 
   /**
    * Find  entries and return the result.
@@ -51,7 +57,7 @@ export abstract class GenericService<T extends Document> {
    * @throws InternalServerErrorException
    */
    async find(
-    conditions: Partial<Record<keyof T, unknown>>,
+    conditions: Partial<Record<keyof T, unknown>>,populate=[],
     projection: string | Record<string, unknown> = {},
     options: Record<string, unknown> = {},
   ): Promise<T[]> {
@@ -59,7 +65,7 @@ export abstract class GenericService<T extends Document> {
         conditions as FilterQuery<T>,
         projection,
         options,
-      );
+      ).populate(populate);
   }
 
   
