@@ -27,9 +27,4 @@ export class AuthController {
         return response.status(HttpStatus.CREATED).json(newUser) ; 
     }
 
-    // @Post("forgotPassword")
-    // async forgotPassword(){
-    //     const user = await this.authService
-    // }
-
 }
