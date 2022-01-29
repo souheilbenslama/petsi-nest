@@ -4,6 +4,7 @@ import { response } from 'express';
 import { updateUserDto} from './dto/updateUser.dto'
 import { User } from './user.schema';
 import { UserService } from './user.service';
+import { UserRoleEnum } from 'src/enums/user-role.enum';
 
 @Controller('users')
 export class UserController {
@@ -23,6 +24,16 @@ export class UserController {
         
     }
     */
+
+    @Get('vets')
+    async getVets(@Res() response,@Param() param){
+        try {
+            const user = await this.userService.find({ role :UserRoleEnum.VETERINARY })
+            return response.status(HttpStatus.OK).json(user) ;
+        } catch(e) {
+            return response.status(HttpStatus.BAD_REQUEST).send(e) ;
+        }
+    }
 
     @Get(':id')
     async getUser(@Res() response,@Param() param){

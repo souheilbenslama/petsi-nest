@@ -14,6 +14,8 @@ import { AppointmentModule } from './appointment/appointment.module';
 import { BathModule } from './bath/bath.module';
 import { WeightModule } from './weight/weight.module';
 import { ConfigModule } from '@nestjs/config';
+import { FolderController } from './folder/folder.controller';
+import { FolderModule } from './folder/folder.module';
 
 
 @Module({
@@ -27,9 +29,10 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     AppointmentModule,
     BathModule,
-    WeightModule
+    WeightModule,
+    FolderModule
   ],
-  controllers: [AppController, ],
+  controllers: [AppController ],
   providers: [AppService],
 })
 export class AppModule {

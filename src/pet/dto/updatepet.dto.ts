@@ -9,18 +9,17 @@ export class updatePetDto {
   @MinLength(3,{message:"pet name have at least 3 caracters "})
   @IsString()
   name: string;
-
-
+  
   image ;
   
   type ;
-
   
   breed ;
 
   birthday ;
 
   sex ;
+  
   weight ;
 
   status ;

@@ -13,6 +13,6 @@ import { PetService } from './pet.service';
 
     MongooseModule.forFeature([{name: Pet.name, schema: PetSchema},]),WeightModule
 
-    ], providers: [PetService],
+    ],exports:[PetService], providers: [PetService],
 })
 export class PetModule {}
