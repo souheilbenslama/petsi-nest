@@ -21,6 +21,16 @@ export class AppointmentController {
         
     }
 
+    @Get('/pet/:id')
+    async getPetAppointment(@Res() response,@Param() param){
+        try {
+            const appointment = await this.appointmentService.find({ pet : param.id})
+            return response.status(HttpStatus.OK).json(appointment) ;
+        } catch(e) {
+            return response.status(HttpStatus.BAD_REQUEST).send(e) ;
+        }
+    }
+
     @Get(':id')
     async getAppointment(@Res() response,@Param() param){
         try {

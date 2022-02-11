@@ -24,7 +24,7 @@ export class PetController {
   
 
     @Get("/one/:id")
-    async getPetById(@Res()response , @Param("id") id : string ){
+    async getPetById(@Res()response , @Param("id") id : string ) {
         const pets= await this.petService.find({_id:id,deleted:false}) ;
         return response.status(HttpStatus.OK).json(pets) ;
     }
