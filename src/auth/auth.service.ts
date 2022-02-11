@@ -20,7 +20,7 @@ export class AuthService {
 
     async genToken(user: User){
       const payload = {firstName:user.firstName,email:user.email,role:user.role};
-      return await this.jwtService.sign(payload);
+      return  await this.jwtService.sign(payload);
     }
 
     async register(user: Partial<User>){ //}: Promise<User> {
@@ -38,7 +38,6 @@ export class AuthService {
         newUser.password = undefined;
         newUser.salt = undefined;
         await this.sendConfirmation(newUser);
-        //return newUser;
       }
 
     async login(userData: Partial<User>){
@@ -47,7 +46,8 @@ export class AuthService {
         const isMatch = await bcrypt.compare(userData.password,user.password)
         if(isMatch){
           if (!user.active) throw new UnauthorizedException('Account not verified yet!');
-          const jwt = this.genToken(user);
+          const jwt = await this.genToken(user);
+          console.log(jwt);
           user.password = undefined;
           user.salt = undefined;
           return {"user":user,"access_token":jwt};
@@ -92,6 +92,7 @@ export class AuthService {
         throw new UnauthorizedException();
     }
   }
+
 
 
 }
