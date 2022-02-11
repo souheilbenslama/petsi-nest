@@ -15,8 +15,10 @@ import { ForgotPasswordSchema } from './forgotPassword/forgotPassword.schema';
 import { ForgotPasswordService } from './forgotPassword/forgotPassword.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ForgotPasswordController } from './forgotPassword/forgotPassword.controller';
-import { UserService } from 'src/user/user.service';
 import { UserModule } from 'src/user/user.module';
+import { ConfEamilController } from './confEmail/confEmail.controller';
+import { ConfEmailService } from './confEmail/confEmail.service';
+import { ConfEmailSchema } from './confEmail/confEmail.schema';
 
 
 dotenv.config();
@@ -34,13 +36,14 @@ dotenv.config();
     }), 
     MongooseModule.forFeature([{name: "ForgotPassword", schema: ForgotPasswordSchema}]),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: 'ConfEmail', schema: ConfEmailSchema }]),
     PassportModule.register({defaultStrategy:"jwt"}),
     JwtModule.register({secret:process.env.SECRET,signOptions:{expiresIn:3600}}),
     MulterModule.register({dest: '../uploads'}),
     NestjsFormDataModule,
   ],
-  providers: [AuthService,JwtStrategy,ConfigService,ForgotPasswordService],
-  controllers: [AuthController, ForgotPasswordController],
-  exports: [ForgotPasswordService]
+  providers: [AuthService,JwtStrategy,ConfigService,ForgotPasswordService,ConfEmailService],
+  controllers: [AuthController, ForgotPasswordController,ConfEamilController],
+  exports: []
 })
 export class AuthModule {}

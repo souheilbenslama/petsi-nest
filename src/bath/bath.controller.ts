@@ -21,6 +21,15 @@ export class BathController {
          
         
     }
+    @Get('/bath/:id')
+    async getPetBath(@Res() response,@Param() param){
+        try {
+            const bath = await this.bathService.find({ pet : param.id})
+            return response.status(HttpStatus.OK).json(bath) ;
+        } catch(e) {
+            return response.status(HttpStatus.BAD_REQUEST).send(e) ;
+        }
+    }
 
     @Get(':id')
     async getBath(@Res() response,@Param() param){

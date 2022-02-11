@@ -43,6 +43,9 @@ export class User {
   role ;
 
   @Prop({type:Boolean,default:false})
+  active ;
+
+  @Prop({type:Boolean,default:false})
   deleted ;
   
   @Prop({type:Date,default:null})

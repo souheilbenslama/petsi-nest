@@ -21,8 +21,8 @@ export class PetService extends GenericService<PetDocument> {
       const newPet = await  this.create(pet) ; 
      // will be changed after setting weight services 
      const weightobj= await this.weightService.create({pet:newPet._id,weight:weight}) ; 
-      // 
-        return  newPet ; 
+     
+      return  newPet ; 
     }
     
 }

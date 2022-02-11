@@ -14,4 +14,8 @@ export class ForgotPasswordService{
     async findOne(body:any){
         return this.forgotPasswordModel.findOne(body);
     }
+
+    async delete(token:any){
+        return this.forgotPasswordModel.remove({token:token});
+    }
 }
