@@ -35,7 +35,7 @@ export class FolderController {
     @Get('/vetRequests/:id')
     async getVetRequests(@Res() response,@Param("id") id:string){
         try {
-            const folders = await this.folderService.find({vet:id,confirm:false,deleted:false},["pet"])
+            const folders = await this.folderService.find({vet:id,confirm:false,deleted:false},["pet","pet.owner"])
             return response.status(HttpStatus.OK).json(folders) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;
@@ -58,7 +58,7 @@ export class FolderController {
     @Get('')
     async getAllFolders(@Res() response,@Param() param){
         try {
-            const folders = await this.folderService.find({deleted:false})
+            const folders = await this.folderService.find({deleted:false},["pet"]);
             return response.status(HttpStatus.OK).json(folders) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;

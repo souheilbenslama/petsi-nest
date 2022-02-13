@@ -19,7 +19,8 @@ export class AuthService {
 
 
     async genToken(user: User){
-      const payload = {firstName:user.firstName,email:user.email,role:user.role};
+      const bdUser = await this.userModel.findOne({email:user.email});
+      const payload = {id:bdUser._id,firstName:user.firstName,email:user.email,role:user.role};
       return  await this.jwtService.sign(payload);
     }
 
