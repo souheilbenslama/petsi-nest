@@ -29,7 +29,7 @@ export class Pet {
   sex ;
   @Prop({type:Number,required:true})
   weight ;
-  @Prop({type:String,default:"o",required:true})
+  @Prop({type:String,default:"o"})
   status ;
   @Prop ({type:mongoose.Schema.Types.ObjectId,ref:'User'})
   owner ; //"User";

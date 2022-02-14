@@ -24,7 +24,7 @@ export class AppointmentController {
     @Get('/pet/:id')
     async getPetAppointment(@Res() response,@Param() param){
         try {
-            const appointment = await this.appointmentService.find({ pet : param.id})
+            const appointment = await this.appointmentService.find({ pet : param.id},["pet","vet"])
             return response.status(HttpStatus.OK).json(appointment) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;
@@ -34,7 +34,7 @@ export class AppointmentController {
     @Get(':id')
     async getAppointment(@Res() response,@Param() param){
         try {
-            const appointment = await this.appointmentService.findOne({ _id : param.id})
+            const appointment = await this.appointmentService.findOne({ _id : param.id},["pet","vet"])
             return response.status(HttpStatus.OK).json(appointment) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;
@@ -43,12 +43,12 @@ export class AppointmentController {
 
     @Get('')
     async getAllAppointment(@Res() response){
-        const appointments = await this.appointmentService.find({})
+        const appointments = await this.appointmentService.find({},["pet","vet"])
         return response.status(HttpStatus.OK).json(appointments) ;
     }
 
     @Put(':id')
-    async updateAppointment(@Res() response,@Body() appointment:UpdateAppointmentDto, @Param() param){
+    async updateAppointment(@Res() response,@Body() appointment:Partial<UpdateAppointmentDto>, @Param() param){
         const updatedAppointment = await this.appointmentService.findOneAndUpdate({_id: param.id}, appointment)
         return response.status(HttpStatus.OK).json(updatedAppointment) ;
     }

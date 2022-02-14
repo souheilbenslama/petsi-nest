@@ -11,7 +11,7 @@ export class AddAppointmentDto {
     @Type(() => Date)
     date;
 
-    @IsNotEmpty({message:"appointment report can not be empty"})
+    //@IsNotEmpty({message:"appointment report can not be empty"})
     @IsString()
     report;
 
