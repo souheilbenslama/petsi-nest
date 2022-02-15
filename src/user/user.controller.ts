@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, Delete, UseFilters } from '@nestjs/common';
+import { Body, Controller, Put,Get, HttpStatus, Param, Post, Res, Delete, UseFilters, Patch } from '@nestjs/common';
 import { response } from 'express';
 import { updateUserDto} from './dto/updateUser.dto'
 import { User } from './user.schema';
@@ -39,6 +39,8 @@ export class UserController {
     async getUser(@Res() response,@Param() param){
         try {
             const user = await this.userService.findOne({ _id : param.id})
+            user.password = undefined;
+            user.salt = undefined;
             return response.status(HttpStatus.OK).json(user) ;
         } catch(e) {
             return response.status(HttpStatus.BAD_REQUEST).send(e) ;
@@ -52,8 +54,10 @@ export class UserController {
     }
 
     @Put(':id')
-    async updateUser(@Res() response,@Body() user:updateUserDto, @Param() param){
-        const updatedUser = await this.userService.findOneAndUpdate({_id: param.id}, user)
+    async updateUser(@Res() response,@Body() user:Partial<updateUserDto>, @Param() param){
+        console.log("user",user.adress);
+        const updatedUser = await this.userService.findOneAndUpdate({_id: param.id}, user, {new:true});
+        console.log("update",updatedUser);
         return response.status(HttpStatus.OK).json(updatedUser) ;
     }
 

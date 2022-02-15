@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { PetService } from 'src/pet/pet.service';
@@ -78,14 +79,14 @@ export class FolderController {
     
     @Patch("/addRapport/:id")
     //  @UseGuards(JwtAuthGuard)
-      async addRapportFolder(@Res() response , @Param("id") id:string , @Body("rapport") rapport: String){
+      async addRapportFolder(@Res() response , @Param("id") id:string , @Body("rapport") rapport: string){
           const result = await this.folderService.findOneAndUpdate({_id:id,deleted:false},{$set:{rapport:rapport}},{new:true}) ;
           return response.status(HttpStatus.OK).json(result) ;
       }
 
       @Patch("/close/:id")
     //  @UseGuards(JwtAuthGuard)
-      async closeFolder(@Res() response , @Param("id") id:string , @Body("rapport") rapport: String){
+      async closeFolder(@Res() response , @Param("id") id:string , @Body("rapport") rapport: string){
           const result = await this.folderService.findOneAndUpdate({_id:id,deleted:false},{$set:{status:"closed"}},{new:true}) ;
           return response.status(HttpStatus.OK).json(result) ;
       }
