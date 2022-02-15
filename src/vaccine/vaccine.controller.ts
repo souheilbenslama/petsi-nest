@@ -23,7 +23,7 @@ export class VaccineController {
     }
 
     @Get('/pet/:id')
-    async getpPetVaccine(@Res() response,@Param() param){
+    async getPetVaccine(@Res() response,@Param() param){
         try {
             const vaccine = await this.vaccineService.find({ pet : param.id},["pet","vet"])
             return response.status(HttpStatus.OK).json(vaccine) ;
