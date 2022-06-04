@@ -16,6 +16,7 @@ import { WeightModule } from './weight/weight.module';
 import { ConfigModule } from '@nestjs/config';
 import { FolderController } from './folder/folder.controller';
 import { FolderModule } from './folder/folder.module';
+import { FoodModule } from './food/food.module';
 
 
 @Module({
@@ -30,7 +31,8 @@ import { FolderModule } from './folder/folder.module';
     AppointmentModule,
     BathModule,
     WeightModule,
-    FolderModule
+    FolderModule,
+    FoodModule
   ],
   controllers: [AppController ],
   providers: [AppService],

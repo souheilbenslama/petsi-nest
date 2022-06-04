@@ -33,7 +33,4 @@ export class updateUserDto {
   @IsNotEmpty({message:"gender is empty!"})
   gender:string;
 
-  @IsString()
-  @IsNotEmpty({message:"role is empty!"})
-  role:string;
  }
