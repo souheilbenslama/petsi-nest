@@ -53,7 +53,7 @@ export class UserController {
 
     @Put(':id')
     async updateUser(@Res() response,@Body() user:updateUserDto, @Param() param){
-        const updatedUser = await this.userService.findOneAndUpdate({_id: param.id}, user)
+        const updatedUser = await this.userService.findOneAndUpdate({_id: param.id}, user,{new:true})
         return response.status(HttpStatus.OK).json(updatedUser) ;
     }
 
