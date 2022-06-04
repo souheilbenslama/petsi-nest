@@ -43,7 +43,7 @@ export class PetController {
    
     @Patch("/:id")
     @UseGuards(JwtAuthGuard)
-    async updatePet(@Res() response , @Param("id") id:string , @Body() update: updatePetDto){
+    async updatePet(@Res() response , @Param("id") id:string , @Body() update: Partial<updatePetDto>){
         const result = await this.petService.findOneAndUpdate({_id:id,deleted:false},{$set:update},{new:true}) ;
         return response.status(HttpStatus.OK).json(result) ;
     }

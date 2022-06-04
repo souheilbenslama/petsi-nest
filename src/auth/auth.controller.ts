@@ -17,8 +17,12 @@ export class AuthController {
         if(file){
             user.avatar=file.path;
         }
-        const newUser = await this.authService.register(user) ;
-        return response.status(HttpStatus.CREATED).json(newUser) ;  
+        try{
+            const newUser = await this.authService.register(user) ;
+            return response.status(HttpStatus.CREATED).json(newUser) ;
+        }catch(e){
+            return response.status(HttpStatus.BAD_REQUEST).send(e)
+        }  
     }
 
     @Post("login")

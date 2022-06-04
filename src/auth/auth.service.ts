@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { BadRequestException, ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/user/user.schema';
@@ -30,12 +30,7 @@ export class AuthService {
         if(alreadyUser) throw new UnauthorizedException('Email already in use!');
         newUser.salt = await bcrypt.genSalt();
         newUser.password = await bcrypt.hash(newUser.password, newUser.salt);
-        try{
-          await newUser.save();
-        }catch(e){
-          console.log(e);
-          throw new ConflictException("Saving new user error");
-        }
+        await newUser.save();
         newUser.password = undefined;
         newUser.salt = undefined;
         await this.sendConfirmation(newUser);
@@ -76,7 +71,8 @@ export class AuthService {
       const token = await this.genToken(user);
       const confirmLink = `http://localhost:4200/confirmEmail/${token}`;
       await this.confEmailService.create({ token, email: user.email });
-      const mailOptions = {to:user.email,subject:'Verify User',html:`Please use this <a href="${confirmLink}">link</a> to confirm your account.`};
+      const email = user.email;
+      const mailOptions = {to:email,subject:'Verify User',html:`Please use this <a href="${confirmLink}">link</a> to confirm your account.`};
       await this.mailerService.sendMail(mailOptions);
       return {message:"success"};
   }
